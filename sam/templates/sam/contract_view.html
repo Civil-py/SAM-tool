@@ -1,0 +1,23 @@
+{% include "sam/header.html" %}
+<body>
+
+<h1> contract {{ contract.software_id }}</h1>
+
+<ul>
+    <li>Start Date: {{ contract.start_date }}</li>
+    <li>End Date: {{ contract.end_date }}</li>
+      <li>Licenses: {{ contract.contact_status }}</li>
+    <li>Licenses: {{ contract.license_type }}</li>
+    <li>Added: {{ contract.added }}</li>
+    <li>Last Updated: {{ contract.last_updated }}</li>
+</ul>
+<div>
+<a href="{% url 'edit_contract' contract.software_id contract.id %}">Edit Contract</a>
+</div>
+
+<div>
+<a href="{% url 'delete_contract' contract.software_id contract.id %}">Delete Contract</a>
+</div>
+
+</body>
+{% include "sam/footer.html" %}

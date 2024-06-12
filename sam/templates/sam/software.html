@@ -1,0 +1,96 @@
+{% include "sam/header.html" %}
+<body>
+{% for m in messages %}
+{{ m }}
+{% endfor %}
+<div class="d-flex justify-content-between align-items-center">
+  <h2 class="display-4">Software</h2>
+  <div class="search-bar">
+    <input type="text" id="searchInput" class="form-control" placeholder="Search for software...">
+  </div>
+</div>
+
+<table class="table" style="margin-top: 20px;">
+  <thead>
+    <tr>
+      <th scope="col">Software Name</th>
+      <th scope="col">Contract Value</th>
+    </tr>
+  </thead>
+  <tbody id="softwareTable">
+  {% for s in software %}
+    <tr>
+      <td> <a href="{% url 'software_view' s.software_id %}">
+        {{ s.software_name }}
+      </a></td>
+      <td>R{{ s.contract_value }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<div style="width: 100%; border-bottom: 1px solid black; margin-top: 20px; margin-bottom: 20px;">
+{% if total_contracts %}
+<div>
+    <h3 class="display-6">Total Contracts Value: R{{ total_contracts }}</h3>
+</div>
+{% endif %}
+</div>
+
+<div class="">
+<a href="{% url 'addsoftware' %}"><button type="button" class="btn btn-secondary">Add Software</button></a>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const rows = document.querySelectorAll("tbody tr");
+    rows.forEach((row, index) => {
+        setTimeout(() => {
+            row.style.opacity = 1;
+            row.style.transform = "translateY(0)";
+        }, index * 200);
+    });
+
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('keyup', function() {
+        const filter = searchInput.value.toLowerCase();
+        const rows = document.querySelectorAll('#softwareTable tr');
+
+        rows.forEach(row => {
+            const softwareName = row.querySelector('td a').textContent.toLowerCase();
+            if (softwareName.includes(filter)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+});
+</script>
+
+<style>
+.d-flex {
+    display: flex;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.search-bar {
+    width: 300px;
+}
+
+table tbody tr {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-in-out, transform 0.5s ease-in-out;
+}
+</style>
+
+</body>
+{% include "sam/footer.html" %}

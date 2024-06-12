@@ -1,0 +1,20 @@
+{% include "sam/header.html" %}
+<body>
+<h1></h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="display-4">Add contract for {{ software.software_name }}  </h4>
+            <form action="" method='POST'>
+                {% csrf_token %}
+                {{ form }}
+
+                <button type="submit" class="btn btn-secondary btn-sm" value=""> Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</body>
+{% include "sam/footer.html" %}

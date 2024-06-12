@@ -1,0 +1,15 @@
+{% include "sam/header.html" %}
+<body>
+
+<h1> user {{ user }}</h1>
+<p>For {{ software.software_name }}</p>
+
+<p>assigned: {{ user.assigned }}</p>
+
+
+
+<a href="{% url 'delete_user' software.software_id user.id %}">
+<button   type="submit" class="btn  btn-danger" data-bs-toggle="popover" data-bs-title="Popover title" data-bs-content="">Unassign User</button>
+</a>
+</body>
+</html>

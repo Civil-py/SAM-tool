@@ -1,0 +1,22 @@
+{% include "sam/header.html" %}
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="display-4">Edit Employee </h4>
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button type="submit" class="btn btn-secondary btn-sm" value=""> Update</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div>
+<a href="{% url 'staff'  %}">Staff Page</a>
+</div>
+
+</body>
+{% include "sam/footer.html" %}

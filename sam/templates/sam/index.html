@@ -1,0 +1,61 @@
+{% include "sam/header.html" %}
+<style>
+  /* Add your custom styles here */
+  .container-split {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px; /* Adjust as needed */
+    margin: 0 auto;
+    padding: 20px;
+  }
+  .container-split img {
+    max-width: 45%; /* Adjust as needed */
+    height: auto;
+  }
+  .animated-text {
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+  }
+  .container {
+    margin-top: 50px; /* Adjust as needed */
+  }
+</style>
+<body>
+  {% load static %}
+  <div class="container text-center">
+    <div>
+      <h4 id="headline" class="animated-text">The Dominate Consulting Software Asset Management Tool  </h4>
+      <p class="animated-text">This tool is a software solution that we have designed to help organizations effectively manage their software assets</p>
+      <p class="animated-text">This tool provides a centralized platform for tracking, monitoring, and optimizing software usage, licenses, and utilization across your organization's Software infrastructure.</p>
+      <p class="animated-text">SAM restricts software allocation to only employees that belong to your organisations active directory.</p>
+      <p class="animated-text">You are provided with an indication of your Software Assets Value as well as important insights such as Utilization % , Software Contract Value Distribution as well as Allocated Users for each Software.</p>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    // Function to animate text
+    function animateText() {
+      var elements = document.querySelectorAll('.animated-text');
+      var delay = 250; // milliseconds
+      var index = 0;
+
+      function showElement() {
+        if (index < elements.length) {
+          elements[index].style.opacity = '1';
+          index++;
+          setTimeout(showElement, delay);
+        }
+      }
+
+      showElement();
+    }
+
+    // Call the animation function when the document is ready
+    document.addEventListener('DOMContentLoaded', animateText);
+  </script>
+</body>
+{% include "sam/footer.html" %}

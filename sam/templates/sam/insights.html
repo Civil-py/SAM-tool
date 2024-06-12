@@ -1,0 +1,48 @@
+{% include "sam/header.html" %}
+<body>
+    <h3 class="display-4">Insights</h3>
+    <div class="container">
+        <div class="chart-container">
+            {{ pie_chart|safe }}
+        </div>
+
+        <div class="chart-container">
+            {{ bar_chart|safe }}
+        </div>
+    </div>
+
+    <style>
+        .chart-container {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .chart-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const options = {
+                threshold: 0.5
+            };
+
+            const observer = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, options);
+
+            const chartContainers = document.querySelectorAll(".chart-container");
+            chartContainers.forEach(container => {
+                observer.observe(container);
+            });
+        });
+    </script>
+</body>
+{% include "sam/footer.html" %}

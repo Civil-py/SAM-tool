@@ -1,0 +1,35 @@
+{% include "sam/header.html" %}
+<body>
+
+<h2>Staff</h2>
+
+    <p>{{ staff.first_name }} {{ staff.last_name }}  <p/>
+<p>{{ staff.email }}  <p/>
+<p>{{ staff.position }}  <p/>
+
+<h4>Softwares Allocated</h4>
+
+
+{% for software in softwares %}
+
+<a href="{% url 'allocated_user_view' software.software_id staff.employee_id %}">
+<p>{{ software }}</p>
+    </a>
+
+{% endfor %}
+
+<div>
+    <a href="{%  url 'delete_staff' staff.employee_id %}">
+    <button   type="submit" class="btn  btn-danger" data-bs-toggle="popover" data-bs-title="Popover title" data-bs-content="">Remove Staff</button></a>
+</div>
+
+<div>
+    <a href="{%  url 'edit_staff' staff.employee_id %}">Edit Staff</a>
+</div>
+
+
+
+
+<a href="{%  url 'staff' %}">Staff</a>
+</body>
+</html>

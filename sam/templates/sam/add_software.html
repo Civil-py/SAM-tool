@@ -1,0 +1,24 @@
+{% include "sam/header.html" %}
+
+<body>
+
+<h4 class="display-4">Add Software </h4>
+<div class="container">
+<div class="col-md-12">
+            <form action="" method='POST'>
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-secondary btn-sm" value=""> Save</button>
+            </form>
+</div>
+    </div>
+
+
+
+
+
+
+
+
+</body>
+{% include "sam/footer.html" %}
