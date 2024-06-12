@@ -1,1 +1,1 @@
-web: gunicorn sam.main:app
+web: gunicorn p.wsgi:application
