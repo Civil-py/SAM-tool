@@ -1,6 +1,7 @@
 {% include "sam/header.html" %}
 <body>
-    <h3 class="display-4">Insights</h3>
+    <h3 class="display-4 text-center">Insights</h3>
+    <h4 class="display-4 text-center" style="font-size: 2rem;">Total Contracts Value: R{{ total_contracts }}</h4>
     <div class="container">
         <div class="chart-container">
             {{ pie_chart|safe }}
@@ -20,6 +21,9 @@
         .chart-container.visible {
             opacity: 1;
             transform: translateY(0);
+        }
+        .text-center {
+            text-align: center;
         }
     </style>
 
