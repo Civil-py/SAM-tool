@@ -85,6 +85,8 @@ def delete_staff(request, employee_id):
 
 def software(request):
     contract_values = Software.objects.aggregate(Sum('contract_value'))
+    total_contracts = []
+    total_contracts.append(contract_values)
     keys = []
     values =[]
     contracts_list= []
@@ -106,6 +108,9 @@ def software(request):
 
 def insights(request):
     # Retrieve data
+    contract_values = Software.objects.aggregate(Sum('contract_value'))
+    total_contracts_value = []
+    total_contracts_value.append(contract_values)
     max_users = Staff.objects.all().count() + 1
     software_data = Software.objects.all()
     software_number_of_users_list = [software.number_of_users for software in software_data]
@@ -149,7 +154,9 @@ def insights(request):
     bar_chart = bar_fig.to_html(full_html=False)
 
     # Pass the charts to the template
-    context = {'pie_chart': pie_chart, 'bar_chart': bar_chart}
+    context = {'pie_chart': pie_chart,
+               'bar_chart': bar_chart,
+               "total_contracts": total_contracts_value[0]['contract_value__sum']}
 
     # Render the template with the charts
     return render(request, 'sam/insights.html', context)
