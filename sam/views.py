@@ -243,6 +243,12 @@ def get_number_of_users(software_id):
         return 0
     return int(number_of_users)
 
+def user_added_message(user_list):
+    if user_list == []:
+        return "No New Users Added"
+    else:
+        return "Users added"
+
 def add_users(request, software_id):
     software_instance = get_object_or_404(Software, software_id=software_id)
     if request.method == "POST":
@@ -251,6 +257,7 @@ def add_users(request, software_id):
             users = user_form.cleaned_data['users']
             current_number_of_users = get_number_of_users(software_instance.software_id)
             user_list = get_user_list(users, software_instance)
+            message = user_added_message(user_list)
 
             # Bulk upload to UserAllocation
             software_users = []
@@ -268,7 +275,7 @@ def add_users(request, software_id):
             new_number_of_users = current_number_of_users + len(user_list)
             Software.objects.filter(software_id=software_id).update(number_of_users=new_number_of_users)
 
-            messages.success(request, f'Users allocated to {software_instance}')
+            messages.success(request, f'{message} to {software_instance}')
             return redirect('software_view', software_id=software_id)
     else:
         user_form = UserAllocationForm(initial={'software': software_instance}, software_instance=software_instance)
