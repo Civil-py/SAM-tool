@@ -1,61 +1,100 @@
 {% include "sam/header.html" %}
 <style>
   /* Add your custom styles here */
+  .container.text-center.spaced-container {
+    margin-top: 20px !important; /* Use !important to override other styles */
+  }
+   .container.text-center.spaced-container {
+    padding-top: 20px; /* Adjust as needed */
+  }
+
   .container-split {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     max-width: 1200px; /* Adjust as needed */
-    margin: 0 auto;
+    margin: 100;
     padding: 20px;
   }
   .container-split img {
     max-width: 45%; /* Adjust as needed */
-    height: auto;
+    height: 1200px;
   }
   .animated-text {
-    opacity: 0;
-    transition: opacity 0.6s ease-in-out;
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out;
+}
+  .spaced-container {
+    margin-top: 10000px; /* Adjust as needed */
   }
-  .container {
-    margin-top: 50px; /* Adjust as needed */
+
+  .spacer {
+    height: 40px; /* Adjust as needed */
   }
+
 </style>
+
+<div class="spacer"></div>
+
 <body>
-  {% load static %}
-  <div class="container text-center">
-    <div>
-      <h4 id="headline" class="animated-text">The Dominate Consulting Software Asset Management Tool  </h4>
-      <p class="animated-text">This tool is a software solution that we have designed to help organizations effectively manage their software assets</p>
-      <p class="animated-text">This tool provides a centralized platform for tracking, monitoring, and optimizing software usage, licenses, and utilization across your organization's Software infrastructure.</p>
-      <p class="animated-text">SAM restricts software allocation to only employees that belong to your organisations active directory.</p>
-      <p class="animated-text">You are provided with an indication of your Software Assets Value as well as important insights such as Utilization % , Software Contract Value Distribution as well as Allocated Users for each Software.</p>
+
+    {% load static %}
+    <div class="container text-center">
+      <div class="row">
+    <div class="col">
+
+       <a href="{% url 'software' %}">
+    <img src="{% static 'sam/software_image3.jpg' %}" class="rounded float-start" alt="...">
+  </a>
+
     </div>
+    <div class="col">
+       <a href="{% url 'insights' %}">
+    <img src="{% static 'sam/insights_image1.jpg' %}" class="rounded float-start" alt="...">
+  </a>
+    </div>
+    <div class="col">
+       <a href="{% url 'staff' %}">
+    <img src="{% static 'sam/employee_image3.png' %}" class="rounded float-start" alt="...">
+  </a>
+    </div>
+
+  <div class="spacer"></div>
+
   </div>
+      <div>
+        <div class="container text-center">
+          <h5 id="headline" class="animated-text">The Dominate Consulting Software Asset Management Tool  </h5>
+<p class="animated-text">This tool is a software solution that we have designed to help organizations effectively manage their software assets</p>
+        <p class="animated-text">This tool provides a centralized platform for tracking, monitoring, and optimizing software usage, licenses, and utilization across your organization's Software infrastructure.</p>
+
+
+      </div>
+    </div>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script>
-    // Function to animate text
-    function animateText() {
-      var elements = document.querySelectorAll('.animated-text');
-      var delay = 250; // milliseconds
-      var index = 0;
+<script>
+// Function to animate text
+function animateText() {
+  var elements = document.querySelectorAll('.animated-text');
+  var delay = 250; // milliseconds
+  var index = 0;
 
-      function showElement() {
-        if (index < elements.length) {
-          elements[index].style.opacity = '1';
-          index++;
-          setTimeout(showElement, delay);
-        }
-      }
-
-      showElement();
+  function showElement() {
+    if (index < elements.length) {
+      elements[index].style.opacity = '1';
+      index++;
+      setTimeout(showElement, delay);
     }
+  }
 
-    // Call the animation function when the document is ready
-    document.addEventListener('DOMContentLoaded', animateText);
-  </script>
+  showElement();
+}
+
+// Call the animation function when the document is ready
+document.addEventListener('DOMContentLoaded', animateText);
+</script>
 </body>
-{% include "sam/footer.html" %}
+</html>{% include "sam/footer.html" %}
