@@ -99,7 +99,7 @@ def software(request):
 
     return render(request, "sam/software.html", {
         "software": Software.objects.all(),
-        "total_contracts": contracts_list[0]['contract_value__sum'],
+       
 
 
 
