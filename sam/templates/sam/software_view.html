@@ -1,21 +1,47 @@
 {% include "sam/header.html" %}
+
+
+
 <body>
+
+<div style="text-align: left; margin: 20px;">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      fill="currentColor"
+      class="bi bi-arrow-left"
+      viewBox="0 0 16 16"
+      onclick="window.history.back()"
+      style="cursor: pointer;"
+    >
+      <path fill-rule="evenodd" d="M15 8a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 0 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 7.5H14.5A.5.5 0 0 1 15 8z"/>
+    </svg>
+  </div>
+
 {% for m in messages %}
 {{ m }}
 {% endfor %}
-<div style="display: flex; align-items: center;">
-    <h1 class="display-2 " style="margin-right: 10px;">{{ software.software_name }}</h1>
-    <a href="{% url 'edit_software' software.software_id %}">
+
+<div class="container">
+  <div class="row" >
+<div class="col">
+            <div class="card m-2" style="width: 30rem;">
+               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-coin" viewBox="0 0 16 16">
+  <path d="M5.5 9.511c.076.954.83 1.697 2.182 1.785V12h.6v-.709c1.4-.098 2.218-.846 2.218-1.932 0-.987-.626-1.496-1.745-1.76l-.473-.112V5.57c.6.068.982.396 1.074.85h1.052c-.076-.919-.864-1.638-2.126-1.716V4h-.6v.719c-1.195.117-2.01.836-2.01 1.853 0 .9.606 1.472 1.613 1.707l.397.098v2.034c-.615-.093-1.022-.43-1.114-.9zm2.177-2.166c-.59-.137-.91-.416-.91-.836 0-.47.345-.822.915-.925v1.76h-.005zm.692 1.193c.717.166 1.048.435 1.048.91 0 .542-.412.914-1.135.982V8.518z"/>
+  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+  <path d="M8 13.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11m0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12"/>
+</svg>
+                <div class="card-body">
+                   <h1 class="display-2 animated-item" style="margin-right: 10px; font-size: 2rem;">Software Name : {{ software.software_name }}</h1><a href="{% url 'edit_software' software.software_id %}">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square animated-item" viewBox="0 0 16 16">
   <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
   <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
 </svg>
     </a>
-</div>
 
-<h3 class="display-6 animated-item">Contract Value: R{{ contract_value }} </h3>
-
-{% if software_contract %}
+                    <p class="display-6 animated-item">Contract Value: R{{ contract_value }} </p>
+                    {% if software_contract %}
     {% for c in software_contract %}
 
     <p class="animated-item">Start Date: {{ c.start_date }}</p>
@@ -44,48 +70,74 @@
     </div>
 {% endif %}
 
-<!-- Insert line here -->
-<hr style="margin: 20px 0; border-top: 1px solid #000;">
+                </div>
+            </div>
+        </div>
 
-<div style="width: 100%; border-bottom: 1px solid black; margin-top: 20px; margin-bottom: 20px;">
-    <div style="display: flex; align-items: center;">
-        <h3 class="display-6 animated-item" style="margin-right: 10px;">Total users: {{ users }}</h3>
-        <a href="{% url 'users_view' software.software_id %}">
+
+<div class="col">
+            <div class="card m-2" style="width: 30rem;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+                </svg>
+                <div class="card-body">
+                    <p class="display-6 animated-item" style="margin-right: 10px;">Total users: {{ users }}</p>
+                    <a href="{% url 'users_view' software.software_id %}">
             <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-people-fill animated-item" viewBox="0 0 16 16">
                 <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
             </svg>
         </a>
-    </div>
-    {% if cost_per_user %}
-        <h3 class="display-6 animated-item">Cost per user: R{{ cost_per_user }} </h3>
+                   {% if cost_per_user %}
+        <p class="display-6 animated-item">Cost per user: R{{ cost_per_user }} </p>
     {% else %}
         <p class="animated-item"></p>
     {% endif %}
-    <div class="mt-3">
-        <a href="{% url 'add_user' software.software_id %}">
+                        {% if utilization %}
+        <div class="animated-item" style="display: flex; justify-content: ">
+            <p class="display-6">Utilization: </p>
+            <p class="display-6" id="utilization" data-utilization="{{ utilization }}">{{ utilization }}%</p>
+        </div>
+    {% else %}
+        <p class="animated-item"></p>
+    {% endif %}
+                     <a href="{% url 'add_user' software.software_id %}">
             <button type="button" class="btn btn-secondary animated-item">Add Users</button>
         </a>
-    </div>
+
+                </div>
+            </div>
+        </div>
+
+
 </div>
+</div>
+
+
 
 
 <!-- Insert line here -->
 
 
+
+
+
+
+
+
+<!-- Insert line here -->
+
+
+<div style="width: 100%; border-bottom: 1px solid black; margin-top: 20px; margin-bottom: 20px;">
+
 <div>
-    {% if utilization %}
-        <div class="animated-item" style="display: flex; justify-content: ">
-            <h4 class="display-6">Utilization:</h4>
-            <h4 class="display-6" id="utilization" data-utilization="{{ utilization }}">{{ utilization }}%</h4>
-        </div>
-    {% else %}
-        <p class="animated-item"></p>
-    {% endif %}
+
+</div>
+
 </div>
 
 
 
-<div class="animated-item">
+<div class="animated-item" style="text-align: center;">
     <button type="button" class="btn btn-danger btn-sm" onclick="showConfirmationPopup()">Delete Software</button>
 </div>
 
@@ -161,6 +213,7 @@ document.getElementById('cancelDelete').addEventListener('click', hideConfirmati
     border-radius: 5px;
     text-align: center;
 }
+
 </style>
 
 </body>
