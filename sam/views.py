@@ -268,7 +268,7 @@ def add_users(request, software_id):
             new_number_of_users = current_number_of_users + len(user_list)
             Software.objects.filter(software_id=software_id).update(number_of_users=new_number_of_users)
 
-            messages.success(request, f'Users {list(user_list)} allocated to {software_instance}')
+            messages.success(request, f'Users allocated to {software_instance}')
             return redirect('software_view', software_id=software_id)
     else:
         user_form = UserAllocationForm(initial={'software': software_instance}, software_instance=software_instance)
