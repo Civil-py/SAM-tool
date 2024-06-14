@@ -2,10 +2,20 @@
 
 <body>
 
+
+<div style="text-align: left; margin: 20px;">
+  <nav style="--bs-breadcrumb-divider: '||';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'software' %}">Software</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Software View</li>
+  </ol>
+</nav>
+  </div>
+
 {% for m in messages %}
 {{ m }}
 {% endfor %}
-
 
 <div class="container">
   <div class="row">
@@ -144,7 +154,7 @@ document.getElementById('cancelDelete').addEventListener('click', hideConfirmati
 .animated-item {
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.4s ease-in-out, transform 0.3s ease-in-out;
+    transition: opacity 0.2s ease-in-out, transform 0.3s ease-in-out;
 }
 
 .popup {
