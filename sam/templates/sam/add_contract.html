@@ -4,7 +4,16 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h4 class="display-4">Add contract for {{ software.software_name }}  </h4>
+                  <div class="col-md-12">
+              <nav style="--bs-breadcrumb-divider: '||';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'software' %}">Software</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'software_view' software.software_id %}">Software View</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Add Contract </li>
+  </ol>
+</nav>
+            <h4 class="display-4" style="font-size: 1rem;">Add contract for {{ software.software_name }}  </h4>
             <form action="" method='POST'>
                 {% csrf_token %}
                 {{ form }}
