@@ -3,88 +3,89 @@
 {% for m in messages %}
 {{ m }}
 {% endfor %}
-<div class="d-flex justify-content-between align-items-center">
-  <h1 class="display-4 animated-item" style="font-size: 2rem;">Software</h1>
-  <div class="search-bar">
-    <input type="text" id="searchInput" class="form-control" placeholder="Search for software...">
-  </div>
-</div>
-
 <div class="container">
-  <div class="row" id="softwareList">
-    {% for s in software %}
-    <div class="col-md-4 software-item">
-      <div class="card m-2 animated-item" style="width: 18rem;">
-
-        <div class="card-body animated-item">
-          <h5 class="display-4 card-title animated-item" style="font-size: 2rem;">{{ s.software_name }}</h5>
-
-          <p class=" card-title animated-item">{{ s.vendor }}</p>
-          <a href="{%  url 'software_view' s.software_id %}" class="btn btn-secondary">view</a>
-        </div>
+  <div class="row">
+    <div class="d-flex justify-content-between align-items-center w-100">
+      <nav style="--bs-breadcrumb-divider: '||';" aria-label="breadcrumb">
+        <ol class="breadcrumb mb-0">
+          <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Software</li>
+        </ol>
+      </nav>
+      <div class="ml-auto search-bar">
+        <input type="text" id="searchInput" class="form-control" placeholder="Search for software...">
       </div>
     </div>
-    {% endfor %}
   </div>
-</div>
 
-<div style="width: 100%; border-bottom: 1px solid black; margin-top: 20px; margin-bottom: 20px;"></div>
+  <div class="container">
+    <div class="row" id="softwareList">
+      {% for s in software %}
+      <div class="col-md-4 software-item">
+        <div class="card m-2 animated-item" style="width: 18rem;">
+          <div class="card-body animated-item">
+            <h5 class="display-4 card-title animated-item" style="font-size: 2rem;">{{ s.software_name }}</h5>
+            <p class="card-title animated-item">{{ s.vendor }}</p>
+            <a href="{% url 'software_view' s.software_id %}" class="btn btn-secondary">view</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
 
-<div class="row">
-  <div class="col" style="text-align: center;">
-    <a href="{% url 'addsoftware' %}"><button type="button" class="btn btn-secondary animated-item">Add Software</button></a>
+  <div style="width: 100%; border-bottom: 1px solid black; margin-top: 20px; margin-bottom: 20px;"></div>
+
+  <div class="row">
+    <div class="col" style="text-align: center;">
+      <a href="{% url 'addsoftware' %}"><button type="button" class="btn btn-secondary animated-item">Add Software</button></a>
+    </div>
   </div>
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
+  document.addEventListener("DOMContentLoaded", function() {
     const items = document.querySelectorAll(".animated-item");
     items.forEach((item, index) => {
-        setTimeout(() => {
-            item.style.opacity = 1;
-            item.style.transform = "translateY(0)";
-        }, index * 200);
+      setTimeout(() => {
+        item.style.opacity = 1;
+        item.style.transform = "translateY(0)";
+      }, index * 200);
     });
 
     const searchInput = document.getElementById('searchInput');
     const softwareItems = document.querySelectorAll('.software-item');
 
     searchInput.addEventListener('keyup', function() {
-        const filter = searchInput.value.toLowerCase();
-        softwareItems.forEach(item => {
-            const softwareName = item.querySelector('.card-title').textContent.toLowerCase();
-            if (softwareName.includes(filter)) {
-                item.style.display = '';
-            } else {
-                item.style.display = 'none';
-            }
-        });
+      const filter = searchInput.value.toLowerCase();
+      softwareItems.forEach(item => {
+        const softwareName = item.querySelector('.card-title').textContent.toLowerCase();
+        if (softwareName.includes(filter)) {
+          item.style.display = '';
+        } else {
+          item.style.display = 'none';
+        }
+      });
     });
-});
+  });
 </script>
 
 <style>
-.d-flex {
+  .d-flex {
     display: flex;
-}
+  }
 
-.justify-content-between {
+  .justify-content-between {
     justify-content: space-between;
-}
+  }
 
-.align-items-center {
+  .align-items-center {
     align-items: center;
-}
+  }
 
-.search-bar {
+  .search-bar {
     width: 300px;
-}
-
-.animated-item {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
-}
+  }
 </style>
 
 </body>
