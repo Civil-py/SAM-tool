@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
     {% include "sam/header.html" %}
@@ -7,10 +7,21 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
 <body>
+{% for m in messages %}
+{{ m }}
+{% endfor %}
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h4 class="display-2 animated-item small-text" style="margin-right: 10px; font-size: 2rem;">Add users for {{ software.software_name }}  </h4>
+            <nav style="--bs-breadcrumb-divider: '||';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'software' %}">Software</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'software_view' software.software_id %}">Software View</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Add Users </li>
+  </ol>
+</nav>
+            <h4 class="display-4" style="font-size : 1rem;">Add users for {{ software.software_name }}  </h4>
             <form action="" method='POST'>
                 {% csrf_token %}
                 {{ form.as_p }}
@@ -19,7 +30,6 @@
         </div>
     </div>
 </div>
-
 <script>
     $(document).ready(function() {
         $('.select2').select2({
@@ -31,4 +41,3 @@
 </script>
 </body>
 {% include "sam/footer.html" %}
-</html>
