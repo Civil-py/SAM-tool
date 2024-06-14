@@ -3,7 +3,15 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h4 class="display-4">Edit Software </h4>
+              <nav style="--bs-breadcrumb-divider: '||';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'software' %}">Software</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'software_view' software.software_id %}">Software View</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Edit Software </li>
+  </ol>
+</nav>
+            <h4 class="display-4" style="font-size : 1rem;"> Edit Software </h4>
             <form action="" method="POST">
                 {% csrf_token %}
                 {{form.as_p}}
@@ -13,9 +21,7 @@
     </div>
 </div>
 
-<div>
-<a href="{% url 'software'  %}">Software Page</a>
-</div>
+
 
 </body>
 {% include "sam/footer.html" %}
