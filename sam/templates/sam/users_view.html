@@ -15,38 +15,26 @@
     opacity: 0;
     animation: popUp 0.5s ease-in-out forwards;
 }
-
-.d-flex {
-    display: flex;
-}
-
-.justify-content-between {
-    justify-content: space-between;
-}
-
-.align-items-center {
-    align-items: center;
-}
-
-.search-bar {
-    width: 300px;
-}
 </style>
 <body>
 {% for m in messages %}
 {{ m }}
 {% endfor %}
-<div class="d-flex justify-content-between align-items-center">
-    <h4 class="display-2 animated-item small-text" style="margin-right: 10px; font-size: 2rem;">{{ software.software_name }} Users: {{ software.number_of_users|floatformat:0 }}</h4>
-    <div class="search-bar">
-        <input type="text" id="searchInput" class="form-control" placeholder="Search for users...">
-    </div>
-</div>
 
-<div class="container" style="margin-top: 20px;">
-    <div class="row" id="userCards">
+<div class="container">
+    <div class="row">
+                  <nav style="--bs-breadcrumb-divider: '||';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+     <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'software' %}">Software</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'software_view' software.software_id %}">Software View</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Users View</li>
+  </ol>
+</nav>
+        <h4 class="display-4" style="font-size: 1rem;">{{ software.software_name }} Users: {{ software.number_of_users|floatformat:0 }}</h4>
+
         {% for u in allocated_user %}
-        <div class="col-md-4 user-card">
+        <div class="col-md-4">
             <div class="card mb-4">
                 <div class="card-body">
                     <h5 class="card-title">{{ u.user.first_name }} {{ u.user.last_name }}</h5>
@@ -74,21 +62,6 @@ document.addEventListener("DOMContentLoaded", function() {
     var cards = document.querySelectorAll(".card");
     cards.forEach(function(card, index) {
         card.style.animationDelay = (index * 0.2) + "s";
-    });
-
-    const searchInput = document.getElementById('searchInput');
-    searchInput.addEventListener('keyup', function() {
-        const filter = searchInput.value.toLowerCase();
-        const cards = document.querySelectorAll('.user-card');
-
-        cards.forEach(card => {
-            const userName = card.querySelector('.card-title').textContent.toLowerCase();
-            if (userName.includes(filter)) {
-                card.style.display = '';
-            } else {
-                card.style.display = 'none';
-            }
-        });
     });
 });
 </script>
