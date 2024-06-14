@@ -1,5 +1,17 @@
 {% include "sam/header.html" %}
 <body>
+
+<div class="container">
+  <div class="row" id="softwareList">
+
+    <div class="d-flex justify-content-between align-items-center">
+  <nav style="--bs-breadcrumb-divider: '||';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Insights</li>
+  </ol>
+</nav>
+</div>
     <h3 class="display-4 text-center">Insights</h3>
     <h4 class="display-4 text-center" style="font-size: 2rem;">Total Contracts Value: R{{ total_contracts }}</h4>
     <div class="container">
