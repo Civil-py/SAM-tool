@@ -20,9 +20,32 @@
 
   <div class="container">
     <div class="row" id="softwareList">
-      {% for s in software %}
+      {% for s in softwares %}
       <div class="col-md-4 software-item">
         <div class="card m-2 animated-item" style="width: 18rem;">
+          {% if s.software_name == "Netflix" %}
+            <img src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/227_Netflix_logo-1024.png" width="50" height="50">
+          {% elif s.software_name == "Microsoft Office" %}
+            <img src="https://logowik.com/content/uploads/images/microsoft-office3327.jpg" width="50" height="50">
+          {% elif s.software_name == "Amazon" %}
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/905px-Amazon_logo.svg.png" width="50" height="50">
+          {% elif s.software_name == "Pycharm" %}
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/PyCharm_Icon.svg/768px-PyCharm_Icon.svg.png" width="50" height="50">
+
+          {% elif s.software_name == "Power Bi" %}
+            <img src="https://logos-world.net/wp-content/uploads/2022/02/Power-BI-Logo-700x394.png" width="50" height="50">
+          {% elif s.software_name == "Photoshop" %}
+            <img src="https://logos-world.net/wp-content/uploads/2020/11/Adobe-Photoshop-Logo-700x394.png" width="50" height="50">
+          {% elif s.software_name == "Reason" %}
+            <img src="https://cdn.worldvectorlogo.com/logos/reason-1.svg" width="50" height="50">
+          {% elif s.software_name == "Microsoft Word" %}
+            <img src="https://cdn.worldvectorlogo.com/logos/word-1.svg" width="50" height="50">
+          {% elif s.software_name == "Microsoft 365" %}
+            <img src="https://cdn.worldvectorlogo.com/logos/Microsoft-365.svg" width="50" height="50">
+
+          {% else %}
+            <img src="https://logodix.com/logo/1162879.png" width="50" height="50">
+          {% endif %}
           <div class="card-body animated-item">
             <h5 class="display-4 card-title animated-item" style="font-size: 2rem;">{{ s.software_name }}</h5>
             <p class="card-title animated-item">{{ s.vendor }}</p>
