@@ -72,6 +72,7 @@ def edit_staff(request, employee_id):
             return redirect('staff')
 
     context = {'form': form,
+               'employee': employee
 }
     return render(request, 'sam/edit_staff.html', context)
 
@@ -99,7 +100,7 @@ def software(request):
 
     return render(request, "sam/software.html", {
         "software": Software.objects.all(),
-       
+
 
 
 
@@ -225,6 +226,7 @@ def edit_software(request, software_id):
             return redirect('software')
 
     context = {'form': form,
+               'software':software
 }
     return render(request, 'sam/edit_software.html', context)
 
@@ -250,11 +252,30 @@ def get_number_of_users(software_id):
         return 0
     return int(number_of_users)
 
-def user_added_message(user_list):
-    if user_list == []:
-        return "No New Users Added"
+def user_added_message(software_id, user_list):
+    number_of_licenses = Software.objects.get(software_id=software_id).number_of_licenses
+    if is_max_users(software_id, user_list):
+        return f"You have reached your max users ({int(number_of_licenses)}) ,please review licenses"
     else:
-        return "Users added"
+        if user_list == []:
+            return f"These users are already allocated to {Software.objects.get(software_id=software_id).software_name}"
+        else:
+            return "Users added"
+
+
+def is_max_users(software_id, user_list):
+    number_of_licenses = Software.objects.get(software_id=software_id).number_of_licenses
+    number_of_users = get_number_of_users(software_id)
+    allowed_users = float(number_of_licenses) - float(number_of_users)
+    users = len(user_list)
+    if users > allowed_users:
+        return True
+    elif users == allowed_users:
+        return False
+    else:
+        return  False
+
+
 
 def add_users(request, software_id):
     software_instance = get_object_or_404(Software, software_id=software_id)
@@ -264,33 +285,40 @@ def add_users(request, software_id):
             users = user_form.cleaned_data['users']
             current_number_of_users = get_number_of_users(software_instance.software_id)
             user_list = get_user_list(users, software_instance)
-            message = user_added_message(user_list)
+            maxed_users = is_max_users(software_id, user_list)
+            message = user_added_message(software_id, user_list)
+            if not maxed_users and user_list != []:
 
-            # Bulk upload to UserAllocation
-            software_users = []
-            for user in user_list:
+                # Bulk upload to UserAllocation
+                software_users = []
+                for user in user_list:
 
-                software_user = UserAllocation(
-                    user=user,
-                    software=software_instance,  # Use the software instance here
-                    assigned=datetime.datetime.now(),
-                )
-                software_users.append(software_user)
+                    software_user = UserAllocation(
+                        user=user,
+                        software=software_instance,  # Use the software instance here
+                        assigned=datetime.datetime.now(),
+                    )
+                    software_users.append(software_user)
 
-            # Bulk create
-            UserAllocation.objects.bulk_create(software_users)
-            new_number_of_users = current_number_of_users + len(user_list)
-            Software.objects.filter(software_id=software_id).update(number_of_users=new_number_of_users)
+                # Bulk create
+                UserAllocation.objects.bulk_create(software_users)
+                new_number_of_users = current_number_of_users + len(user_list)
+                Software.objects.filter(software_id=software_id).update(number_of_users=new_number_of_users)
 
-            messages.success(request, f'{message} to {software_instance}')
-            return redirect('software_view', software_id=software_id)
+                messages.success(request, f'{message} to {software_instance}')
+                return redirect('software_view', software_id=software_id)
+            else:
+                messages.error(request, f'{message}')
+
     else:
-        user_form = UserAllocationForm(initial={'software': software_instance}, software_instance=software_instance)
+            user_form = UserAllocationForm(initial={'software': software_instance}, software_instance=software_instance)
 
     return render(request, "sam/add_users.html", {
         'form': user_form,
         'software': software_instance
     })
+
+
 def add_contract(request, software_id):
     contract = ContractForm(initial={'software_id': software_id, 'contract_id':  str(uuid4()).split('-')[2]})
     if request.method == "POST":
@@ -386,7 +414,9 @@ def edit_contract(request, software_id, id):
                 return redirect('software')
 
 
-        return render(request, 'sam/edit_contract.html', {'form': form})
+        return render(request, 'sam/edit_contract.html',
+                      {'form': form,
+                       'contract':contract})
     else:
         # Handle the case where no employee with the given ID is found
         # You might want to redirect to an error page or display a message
