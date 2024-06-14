@@ -1,23 +1,64 @@
 {% include "sam/header.html" %}
+<div class="spacer"></div>
 <body>
 
-<h1> contract {{ contract.software_id }}</h1>
+<div class="container">
+    <div class="row animated-item">
+    <div class="col-md-4 contract-view-item">
+        <nav style="--bs-breadcrumb-divider: '||';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
 
-<ul>
-    <li>Start Date: {{ contract.start_date }}</li>
-    <li>End Date: {{ contract.end_date }}</li>
-      <li>Licenses: {{ contract.contact_status }}</li>
-    <li>Licenses: {{ contract.license_type }}</li>
-    <li>Added: {{ contract.added }}</li>
-    <li>Last Updated: {{ contract.last_updated }}</li>
-</ul>
-<div>
-<a href="{% url 'edit_contract' contract.software_id contract.id %}">Edit Contract</a>
+      <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'software' %}">Software</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'software_view' contract.software_id %}">Software View</a></li>
+
+    <li class="breadcrumb-item active" aria-current="page">Contract View</li>
+  </ol>
+</nav>
+    <div class="card animated-text" style="width: 18rem;">
+  <div class="card-body">
+
+    <p class="card-text">Start Date : {{ contract.start_date }} </p>
+    <p class="card-text">End Date : {{ contract.end_date }} </p>
+    <p class="card-text">Status : {{ contract.contact_status }} </p>
+    <p class="card-text">Licenses : {{ contract.license_type }} </p>
+                            <p class="card-text">renewal_status : {{ contract.renewal_status }} </p>
+
+    <a href="{% url 'edit_contract' contract.software_id contract.id %}">
+        <button type="submit" class="btn btn-secondary btn-sm" data-bs-toggle="popover" data-bs-title="Popover title" data-bs-content="">Edit Contract</button>
+    </a>
+    <a href="{% url 'delete_contract' contract.software_id contract.id %}">
+        <button type="submit" class="btn btn-danger btn-sm" data-bs-toggle="popover" data-bs-title="Popover title" data-bs-content="">Remove Contract</button>
+    </a>
+  </div>
+</div>
+</div>
+</div>
 </div>
 
-<div>
-<a href="{% url 'delete_contract' contract.software_id contract.id %}">Delete Contract</a>
-</div>
+<style>
+  .spacer {
+    height: 40px; /* Adjust as needed */
+  }
+
+  .animated-text {
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+  }
+</style>
+
+<script>
+  function animateText() {
+    var elements = document.querySelectorAll('.animated-text');
+    var delay = 250; // milliseconds
+    elements.forEach((element, index) => {
+      setTimeout(() => {
+        element.style.opacity = 1;
+      }, index * delay);
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", animateText);
+</script>
 
 </body>
-{% include "sam/footer.html" %}
