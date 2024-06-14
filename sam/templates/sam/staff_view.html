@@ -1,22 +1,18 @@
 {% include "sam/header.html" %}
 <body>
- <div style="text-align: left; margin: 20px;">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      fill="currentColor"
-      class="bi bi-arrow-left"
-      viewBox="0 0 16 16"
-      onclick="window.history.back()"
-      style="cursor: pointer;"
-    >
-      <path fill-rule="evenodd" d="M15 8a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 0 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 7.5H14.5A.5.5 0 0 1 15 8z"/>
-    </svg>
-  </div>
+
+
+
 
 <div class="container">
   <div class="row animated-item">
+     <nav style="--bs-breadcrumb-divider: '||';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'staff' %}">Staff</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Staff View </li>
+  </ol>
+</nav>
       <h2 >Staff</h2>
 
     <div class="col-md-4 animated-item">
@@ -87,6 +83,5 @@ document.addEventListener("DOMContentLoaded", function() {
     transition: opacity 0.4s ease-in-out, transform 0.3s ease-in-out;
 }
 </style>
-
-{% include "sam/footer.html" %}
 </body>
+{% include "sam/footer.html" %}
