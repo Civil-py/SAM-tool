@@ -19,6 +19,12 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+image_links = {"Netflix": "https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/227_Netflix_logo-1024.png",
+        "Microsoft office": "https://logowik.com/content/uploads/images/microsoft-office3327.jpg",
+        "Pycharm" :"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/PyCharm_Icon.svg/768px-PyCharm_Icon.svg.png",
+        "Amazon" : "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/905px-Amazon_logo.svg.png",
+        "Generic" : "https://cdn-icons-png.freepik.com/512/8365/8365217.png"}
+
 # Create your views here.
 def index(request):
     return render(request, "sam/index.html")
@@ -83,30 +89,37 @@ def delete_staff(request, employee_id):
     return redirect('staff')
 
 
+image_links = {"Netflix": "https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/227_Netflix_logo-1024.png",
+        "Microsoft office": "https://logowik.com/content/uploads/images/microsoft-office3327.jpg",
+        "Pycharm" :"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/PyCharm_Icon.svg/768px-PyCharm_Icon.svg.png",
+        "Amazon" : "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/905px-Amazon_logo.svg.png",
+        "Generic" : "https://cdn-icons-png.freepik.com/512/8365/8365217.png"}
+
+def get_logos():
+    software_names = Software.objects.all().values("software_name")
+    images = image_links
+    logos = []
+    for software in software_names:
+        name = software['software_name']
+        if name == "Netflix":
+            logos.append("https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/227_Netflix_logo-1024.png")
+        elif name == "Microsoft Office":
+            logos.append("https://logowik.com/content/uploads/images/microsoft-office3327.jpg")
+        elif name == "Amazon":
+            logos.append("https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/905px-Amazon_logo.svg.png")
+        elif name == "Pycharm":
+            logos.append("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/PyCharm_Icon.svg/768px-PyCharm_Icon.svg.png")
+        else:
+            logos.append("https://cdn-icons-png.freepik.com/512/8365/8365217.png")
+    return logos
 
 def software(request):
-    contract_values = Software.objects.aggregate(Sum('contract_value'))
-    total_contracts = []
-    total_contracts.append(contract_values)
-    keys = []
-    values =[]
-    contracts_list= []
-    total = contract_values
     softwares = Software.objects.all()
-    contracts_list.append(contract_values)
-    software_id = Software.objects.all().values("software_id")
-    software_names = Software.objects.all().values("software_name")
-
-
+    logos = get_logos()
     return render(request, "sam/software.html", {
-        "software": Software.objects.all(),
-
-
-
-
-
+        "softwares": softwares,
+        "logos": logos
     })
-
 def insights(request):
     # Retrieve data
     contract_values = Software.objects.aggregate(Sum('contract_value'))
