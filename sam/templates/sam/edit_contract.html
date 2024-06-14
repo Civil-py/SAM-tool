@@ -3,7 +3,15 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h4 class="display-4">Edit Contract </h4>
+            <nav style="--bs-breadcrumb-divider: '||';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'software' %}">Software</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'contract_view' contract.software_id contract.id %}">Contract View</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Edit Contract </li>
+  </ol>
+</nav>
+            <h4 class="display-4" style="font-size: 1rem;">Edit Contract </h4>
 
             <form action="" method="POST">
                 {% csrf_token %}
